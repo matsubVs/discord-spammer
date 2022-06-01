@@ -164,6 +164,7 @@ https://docs.google.com/forms/d/e/1FAIpQLSe88ZrDxBBZ8PupvHwuz8EkzZZDE1j0_blXhfMK
 
     def start_scheduler(self):
         self.scheduler.add_job(self.send_spam, "interval", minutes=30)
+        print('scheduler set up')
         self.scheduler.start()
 
 
