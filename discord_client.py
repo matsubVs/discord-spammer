@@ -130,6 +130,7 @@ https://docs.google.com/forms/d/e/1FAIpQLSe88ZrDxBBZ8PupvHwuz8EkzZZDE1j0_blXhfMK
 
         if message["op"] == 9:
             print("restart")
+            print(message)
             self.restart = True
             self.ws.close()
 
