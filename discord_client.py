@@ -56,6 +56,7 @@ class DiscordConnection:
             headers=headers,
             files=files,
         )
+        print('spam req', x.content)
 
     def on_open(self, ws: WebSocketApp):
         if self.restart:
@@ -118,7 +119,7 @@ https://docs.google.com/forms/d/e/1FAIpQLSe88ZrDxBBZ8PupvHwuz8EkzZZDE1j0_blXhfMK
 
     def _message_handler(self, message):
         if message["t"] == "MESSAGE_CREATE":
-            print("here")
+            print("new message reg")
             if message["d"]["author"]["id"] == "979645154308796496":
                 return
             author_id = message["d"]["channel_id"]
@@ -128,7 +129,7 @@ https://docs.google.com/forms/d/e/1FAIpQLSe88ZrDxBBZ8PupvHwuz8EkzZZDE1j0_blXhfMK
         message = json.loads(message)
 
         if message["op"] == 9:
-            print("here")
+            print("restart")
             self.restart = True
             self.ws.close()
 
@@ -162,7 +163,7 @@ https://docs.google.com/forms/d/e/1FAIpQLSe88ZrDxBBZ8PupvHwuz8EkzZZDE1j0_blXhfMK
         self.ws.run_forever()
 
     def start_scheduler(self):
-        self.scheduler.add_job(self.send_spam, "interval", seconds=30)
+        self.scheduler.add_job(self.send_spam, "interval", minutes=30)
         self.scheduler.start()
 
 
