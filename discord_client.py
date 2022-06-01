@@ -56,6 +56,7 @@ class DiscordConnection:
             headers=headers,
             files=files,
         )
+        print('send spam')
         print('spam req', x.content)
 
     def on_open(self, ws: WebSocketApp):
@@ -124,6 +125,10 @@ https://docs.google.com/forms/d/e/1FAIpQLSe88ZrDxBBZ8PupvHwuz8EkzZZDE1j0_blXhfMK
                 return
             author_id = message["d"]["channel_id"]
             self.send_dm_message(author_id)
+        elif message['t'] == "RESUMED":
+            print('session resumed')
+        elif message['t'] == 'READY':
+            print('bot ready')
 
     def on_message(self, ws: WebSocketApp, message: str) -> None:
         message = json.loads(message)
